@@ -1,0 +1,13 @@
+
+#PBS -o /export/home2/yosvany/SucEvol/shell.log
+
+export CLASSPATH=/export/home2/yosvany/weka/weka-3-8-0/weka.jar:.
+
+CMD[0]="java weka.classifiers.trees.J48 -C 0.25 -M 2 -B -J -t /export/home2/yosvany/SucEvol/feature_matrix.arff -x 10 -d /export/home2/yosvany/SucEvol/tree_10.model > /export/home2/yosvany/SucEvol/tree_10.out"
+
+CMD[1]="java weka.classifiers.trees.J48 -C 0.25 -M 2 -B -J -t /export/home2/yosvany/SucEvol/feature_matrix.arff -x 8 -d /export/home2/yosvany/SucEvol/tree_8.model > /export/home2/yosvany/SucEvol/tree_8.out"
+
+CMD[2]="java weka.classifiers.trees.J48 -C 0.25 -M 2 -B -J -t /export/home2/yosvany/SucEvol/feature_matrix.arff -x 6 -d /export/home2/yosvany/SucEvol/tree_6.model > /export/home2/yosvany/SucEvol/tree_6.out"
+
+ID=$(($PBS_ARRAYID - 1))
+eval ${CMD[$ID]}
